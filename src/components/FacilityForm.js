@@ -15,17 +15,21 @@ const FacilityForm = (props) => {
 
     // edit or delete
     useEffect(()=>{
-        if(props.currentId=='')
+        if(props.currentId==''){
             setValues({
                 ...initialFieldValues
             })
-        else
+        }
+        else{
+            // populating the form fields
             setValues({
                 ...props.facilityObjects[props.currentId]
             })
+        }
         
     },[props.currentId,props.facilityObjects]);
 
+    // when the form is changed
     const handleInputChange = e => {
         var { name, value } = e.target;
         setValues({
@@ -36,7 +40,7 @@ const FacilityForm = (props) => {
 
     const handleFormSubmit = e => {
         e.preventDefault();
-        props.addOrEdit(values);
+        props.addOrEdit(values); // pass values to 
         console.log(values);
     }
 

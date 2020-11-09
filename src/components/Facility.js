@@ -12,18 +12,36 @@ const Facility = () => {
         db.collection("facilities").onSnapshot(function(data){
             console.log(data);
             setFacilityObjects(data.docs.map(doc => ({
-                ...doc.data()
+                ...doc.data(),
+                id:doc.id
             })))
         })
     },[])
 
 
     const addOrEdit = obj => {
-        if(currentId == '')
-            db.collection('facilities').add(obj)
-        else
-            db.collection('facilities').doc(currentId).update(obj);
+        if(currentId == ''){
+            db.collection('facilities').add(obj).then(function() {
+                console.log(currentId)
+                console.log("Document successfully added!");
+                setCurrentId('')
+            });
+            console.log("added")
+        }
+        else{
+            db.collection('facilities').doc(facilityObjects[currentId].id).set(obj).then(function() {
+                console.log("Document successfully updated!");
+                setCurrentId('')
+            });
+        }
+    }
 
+    const onDelete = id =>{
+        if(window.confirm("Delete this document?")){
+            db.collection('facilities').doc(id).delete().then(function() {
+                console.log("Document successfully deleted!");
+            });
+        }
     }
 
     return(
@@ -54,7 +72,7 @@ const Facility = () => {
                                     <td>{facilityObjects[id].fac_type}</td>
                                     <td>
                                         <a className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a>&nbsp;
-                                        <a className="btn btn-danger">Delete</a>
+                                        <a className="btn btn-danger"  onClick={()=> {onDelete(facilityObjects[id].id)}}>Delete</a>
                                     </td>
                                 </tr>
                             })
