@@ -4,17 +4,10 @@ import { db, auth } from "./firebase";
 
 const Facility = () => {
 
-    // similar to componentDidMount
     var [facilityObjects,setFacilityObjects] = useState({});
+    var [currentId, setCurrentId] = useState('');
 
-    // useEffect(() =>{
-    //     db.collection("facilities").onSnapshot(function(data){
-    //         console.log(data);
-    //         setFacilityObjects(data.docs.map(doc => ({
-    //             ...doc.data()
-    //         })))
-    // },[])
-
+    // similar to componentDidMount
     useEffect(() =>{
         db.collection("facilities").onSnapshot(function(data){
             console.log(data);
@@ -26,8 +19,11 @@ const Facility = () => {
 
 
     const addOrEdit = obj => {
-        console.log(obj);
-        db.collection('facilities').add(obj);
+        if(currentId == '')
+            db.collection('facilities').add(obj)
+        else
+            db.collection('facilities').doc(currentId).update(obj);
+
     }
 
     return(
@@ -39,7 +35,7 @@ const Facility = () => {
         </div>
         <div className="row">
             <div className="col-md-5">
-                <FacilityForm addOrEdit={addOrEdit}/>
+                <FacilityForm {...({addOrEdit,currentId,facilityObjects})}/>
             </div>
             <div className="col-md-7">
                 <table className="table table-borderless table-stripped">
@@ -57,7 +53,7 @@ const Facility = () => {
                                     <td>{facilityObjects[id].fac_id}</td>
                                     <td>{facilityObjects[id].fac_type}</td>
                                     <td>
-                                        <a className="btn btn-primary">Edit</a>&nbsp;
+                                        <a className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a>&nbsp;
                                         <a className="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>

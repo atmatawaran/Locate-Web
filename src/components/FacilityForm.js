@@ -13,6 +13,19 @@ const FacilityForm = (props) => {
 
     var[values,setValues] = useState(initialFieldValues);
 
+    // edit or delete
+    useEffect(()=>{
+        if(props.currentId=='')
+            setValues({
+                ...initialFieldValues
+            })
+        else
+            setValues({
+                ...props.facilityObjects[props.currentId]
+            })
+        
+    },[props.currentId,props.facilityObjects]);
+
     const handleInputChange = e => {
         var { name, value } = e.target;
         setValues({
@@ -88,7 +101,7 @@ const FacilityForm = (props) => {
                 </div>
                 
                 <div className="form-control">
-                        <input type="submit" value="Save" className="btn btn-primary btn-block"/> 
+                        <input type="submit" value={props.currentId==""?"Save":"Update"} className="btn btn-primary btn-block"/> 
                 </div>
 
 
