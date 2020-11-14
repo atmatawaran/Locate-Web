@@ -21,12 +21,12 @@ const User = () => {
 
     const addOrEdit = obj => {
         if(currentId == ''){
-            db.collection('users').add(obj).then(function() {
-                console.log(currentId)
+
+            db.collection('users').document().add(obj).then(function() {
+                console.log(obj.user_email)
                 console.log("Document successfully added!");
                 setCurrentId('')
             });
-            console.log("added")
         }
         else{
             db.collection('users').doc(userObjects[currentId].id).set(obj).then(function() {
@@ -72,7 +72,7 @@ const User = () => {
                                     <td>{userObjects[id].user_email}</td>
                                     <td>
                                         <a className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a>&nbsp;
-                                        <a className="btn btn-danger"  onClick={()=> {onDelete(userObjects[id].id)}}>Delete</a>
+                                        {/* <a className="btn btn-danger"  onClick={()=> {onDelete(userObjects[id].id)}}>Delete</a> */}
                                     </td>
                                 </tr>
                             })

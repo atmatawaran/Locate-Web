@@ -4,6 +4,7 @@ const UserForm = (props) => {
     const initialFieldValues = {
         user_username: "",
         user_email: "",
+        user_password: "",
     }
 
     var[values,setValues] = useState(initialFieldValues);
@@ -45,13 +46,11 @@ const UserForm = (props) => {
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            <i className="fas fa-user"></i>
-                        </div>
+                    <span class="input-group-text">@</span>
                     </div>
                     <input className="form-control" placeholder="User Name" 
                     name="user_username" value={values.user_username}
-                    onChange={handleInputChange}/>
+                    onChange={handleInputChange} required/>
                 </div>
 
                 <div className="form-group input-group col-md-6">
@@ -62,14 +61,23 @@ const UserForm = (props) => {
                     </div>
                     <input className="form-control" placeholder="User Email" 
                     name="user_email" value={values.user_email}
-                    onChange={handleInputChange}/>
+                    onChange={handleInputChange} required/>
+                </div>
+
+                <div className="form-group input-group col-md-6">
+                    <div className="input-group-prepend">
+                        <div className="input-group-text">
+                            <i className="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <input className="form-control" placeholder="User Password" 
+                    name="user_password" value={values.user_password}
+                    onChange={handleInputChange} required/>
                 </div>
                 </div>
 
                 
-                <div className="form-control">
                         <input type="submit" value={props.currentId==""?"Save":"Update"} className="btn btn-primary btn-block"/> 
-                </div>
 
 
         </form> //FORM

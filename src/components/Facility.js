@@ -6,6 +6,7 @@ const Facility = () => {
 
     var [facilityObjects,setFacilityObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
+    var [disabled, setDisabled] = useState(true);
 
     // similar to componentDidMount
     useEffect(() =>{
@@ -29,10 +30,27 @@ const Facility = () => {
             console.log("added")
         }
         else{
-            db.collection('facilities').doc(facilityObjects[currentId].id).set(obj).then(function() {
+            db.collection('facilities').doc(facilityObjects[currentId].id)
+            .update({
+                fac_id: obj.fac_id,
+                fac_type: obj.fac_type,
+                fac_info: obj.fac_info,
+                fac_address: obj.fac_address
+            
+            })
+            .then(function() {
                 console.log("Document successfully updated!");
                 setCurrentId('')
             });
+
+
+            // db.collection('facilities').doc(facilityObjects[currentId].id)
+            // .set(obj)
+            // .then(function() {
+            //     console.log("Document successfully updated!");
+            //     setCurrentId('')
+            // });
+
         }
     }
 
@@ -48,12 +66,12 @@ const Facility = () => {
     <>
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="display-4" text-center>Add Facility</h1>
+                <h1 class="display-4" text-center>Manage Facilities</h1>
             </div>
         </div>
         <div className="row">
             <div className="col-md-5">
-                <FacilityForm {...({addOrEdit,currentId,facilityObjects})}/>
+                <FacilityForm {...({addOrEdit,currentId,facilityObjects,disabled})}/>
             </div>
             <div className="col-md-7">
                 <table className="table table-borderless table-stripped">
@@ -71,7 +89,9 @@ const Facility = () => {
                                     <td>{facilityObjects[id].fac_id}</td>
                                     <td>{facilityObjects[id].fac_type}</td>
                                     <td>
-                                        <a className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a>&nbsp;
+                                    {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
+                                        <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>
+                                        {/* function(event){ func1(); func2()} */}
                                         <a className="btn btn-danger"  onClick={()=> {onDelete(facilityObjects[id].id)}}>Delete</a>
                                     </td>
                                 </tr>
