@@ -44,6 +44,7 @@ const ActCable = () => {
             .then(function() {
                 alert("Document successfully updated!");
                 setCurrentId('')
+                setDisabled(true);
             });
 
         }

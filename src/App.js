@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css'
 import ActCable from './components/ActCable';
 import ActManhole from './components/ActManhole';
+import ActCabinet from './components/ActCabinet';
 
 function App(){
   return(
@@ -16,6 +17,7 @@ function App(){
           <Route exact path="/user" component={User} />
           <Route exact path="/activity-cable" component={ActCable}/>
           <Route exact path="/activity-manhole" component={ActManhole} />
+          <Route exact path="/activity-cabinet" component={ActCabinet} />
         </div>
     </div>
     </Router>

@@ -1,19 +1,18 @@
 import React, {useState, useEffect} from "react";
-import ActCable_Form from "./ActCable_Form";
-import ActManhole_Form from "./ActManhole_Form";
+import ActCabinet_Form from "./ActCabinet_Form";
 import { db, auth } from "./firebase";
 
-const ActManhole = () => {
+const ActCabinet = () => {
 
-    var [manholeObjects,setManholeObjects] = useState({});
+    var [cabinetObjects,setCabinetObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
 
     // similar to componentDidMount
     useEffect(() =>{
-        db.collection("activities_mh").onSnapshot(function(data){
+        db.collection("activities_cabinet").onSnapshot(function(data){
             console.log(data);
-            setManholeObjects(data.docs.map(doc => ({
+            setCabinetObjects(data.docs.map(doc => ({
                 ...doc.data(),
                 id:doc.id
             })))
@@ -23,7 +22,7 @@ const ActManhole = () => {
 
     const addOrEdit = obj => {
         if(currentId == ''){
-            db.collection('activities_mh').add(obj).then(function() {
+            db.collection('activities_cabinet').add(obj).then(function() {
                 console.log(currentId)
                 console.log("Document successfully added!");
                 setCurrentId('')
@@ -31,18 +30,21 @@ const ActManhole = () => {
             console.log("added")
         }
         else{
-            db.collection('activities_mh').doc(manholeObjects[currentId].id)
+            db.collection('activities_cabinet').doc(cabinetObjects[currentId].id)
             .update({
-                mh_cover: obj.mh_cover,
-                mh_row: obj.mh_row,
-                mh_lock: obj.mh_lock,
-                mh_remarks: obj.mh_remarks,
-                mh_find_recc: obj.mh_find_recc
-            
+                cab_door: obj.cab_door,
+                cab_terminal: obj.cab_terminal,
+                cab_jumper: obj.cab_jumper,
+                cab_lock: obj.cab_lock,
+                cab_port: obj.cab_port,
+                cab_ground: obj.cab_ground,
+                cab_ovoc: obj.cab_ovoc,
+                cab_remarks: obj.cab_remarks,
+                cab_find_recc: obj.cab_find_recc
             })
             .then(function() {
                 alert("Document successfully updated!");
-                setCurrentId('')
+                setCurrentId('');
                 setDisabled(true);
             });
 
@@ -51,7 +53,7 @@ const ActManhole = () => {
 
     const onDelete = id =>{
         if(window.confirm("Delete this document?")){
-            db.collection('activities_mh').doc(id).delete().then(function() {
+            db.collection('activities_cabinet').doc(id).delete().then(function() {
                 console.log("Document successfully deleted!");
             });
         }
@@ -61,13 +63,13 @@ const ActManhole = () => {
     <>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <b><h2> Manage Manhole Activities </h2></b>
+                <b><h2> Manage Cabinet Activities </h2></b>
             </ol>
         </nav>
 
         <div className="row">
             <div className="col-md-5">
-                <ActManhole_Form {...({addOrEdit,currentId,manholeObjects,disabled})}/>
+                <ActCabinet_Form {...({addOrEdit,currentId,cabinetObjects,disabled})}/>
             </div>
             <div className="col-md-7">
                 <table className="table table-borderless table-stripped">
@@ -80,15 +82,15 @@ const ActManhole = () => {
                     </thead>
                     <tbody>
                         {
-                            Object.keys(manholeObjects).map(id =>{
+                            Object.keys(cabinetObjects).map(id =>{
                                 return <tr key={id}>
-                                    <td>{manholeObjects[id].activity_no}</td>
-                                    <td>{manholeObjects[id].activity_type}</td>
+                                    <td>{cabinetObjects[id].activity_no}</td>
+                                    <td>{cabinetObjects[id].activity_type}</td>
                                     <td>
                                     {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
                                         <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>
                                         {/* function(event){ func1(); func2()} */}
-                                        <a className="btn btn-danger"  onClick={()=> {onDelete(manholeObjects[id].id)}}>Delete</a>
+                                        <a className="btn btn-danger"  onClick={()=> {onDelete(cabinetObjects[id].id)}}>Delete</a>
                                     </td>
                                 </tr>
                             })
@@ -103,4 +105,4 @@ const ActManhole = () => {
     );
 }
 
-export default ActManhole;
+export default ActCabinet;
