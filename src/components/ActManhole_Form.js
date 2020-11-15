@@ -1,16 +1,14 @@
 import React, {useState, useEffect} from "react";
 
-const ActCable_Form = (props) => {
+const ActManhole_Form = (props) => {
     const initialFieldValues = {
         activity_no: "",
         activity_type: "",
-        cable_owner: "",
-        cable_cond: "",
-        cable_clear_obst: "",
-        cable_low_sag: "",
-        cable_exposed: "",
-        cable_remarks: "",
-        cable_find_recc: ""
+        mh_cover: "",
+        mh_row: "",
+        mh_lock: "",
+        mh_remarks: "",
+        mh_find_recc: ""
     }
 
     var[values,setValues] = useState(initialFieldValues);
@@ -25,11 +23,11 @@ const ActCable_Form = (props) => {
         else{
             // populating the form fields
             setValues({
-                ...props.cableObjects[props.currentId]
+                ...props.manholeObjects[props.currentId]
             })
         }
         
-    },[props.currentId,props.cableObjects]);
+    },[props.currentId,props.manholeObjects]);
     
 
     // when the form is changed
@@ -95,55 +93,33 @@ const ActCable_Form = (props) => {
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Owner
+                            Cover Condition
                         </div>
                     </div>
                     <input className="form-control"
-                    name="cable_owner" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_owner}
+                    name="mh_cover" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_cover}
                     onChange={handleInputChange}/>
                 </div>
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Cable Condition
+                            Right of Way
                         </div>
                     </div>
                     <input className="form-control"
-                    name="cable_cond" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_cond}
+                    name="mh_row" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_row}
                     onChange={handleInputChange}/>
                 </div>
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Clear from Obstruction?
+                            Cover Lock
                         </div>
                     </div>
                     <input className="form-control"
-                    name="cable_clear_obst" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_clear_obst}
-                    onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cable Low Sagged?
-                        </div>
-                    </div>
-                    <input className="form-control"
-                    name="cable_low_sag" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_low_sag}
-                    onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Exposed Bridge?
-                        </div>
-                    </div>
-                    <input className="form-control"
-                    name="cable_exposed" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_exposed}
+                    name="mh_lock" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_lock}
                     onChange={handleInputChange}/>
                 </div>
 
@@ -153,7 +129,7 @@ const ActCable_Form = (props) => {
                             Remarks
                         </div>
                     </div>
-                    <textarea class="form-control" rows="3" name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_remarks}
+                    <textarea class="form-control" rows="3" name="mh_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_remarks}
                     onChange={handleInputChange}></textarea>
                 </div>
                 
@@ -164,7 +140,7 @@ const ActCable_Form = (props) => {
                             Findings
                         </div>
                     </div>
-                    <textarea class="form-control" rows="3" name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_find_recc}
+                    <textarea class="form-control" rows="3" name="mh_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_find_recc}
                     onChange={handleInputChange}></textarea>
                 </div>
 
@@ -178,4 +154,4 @@ const ActCable_Form = (props) => {
     );
 }
 
-export default ActCable_Form;
+export default ActManhole_Form;
