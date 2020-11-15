@@ -67,12 +67,12 @@ const ActCable_Form = (props) => {
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
-
+        
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Act No
+                            ID
                         </div>
                     </div>
                     <input className="form-control" 
@@ -83,7 +83,7 @@ const ActCable_Form = (props) => {
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Act Type
+                            Type
                         </div>
                     </div>
                     <input className="form-control" 
@@ -153,25 +153,24 @@ const ActCable_Form = (props) => {
                             Remarks
                         </div>
                     </div>
-                    <input className="form-control"
-                    name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_remarks}
-                    onChange={handleInputChange}/>
+                    <textarea class="form-control" rows="3" name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_remarks}
+                    onChange={handleInputChange}></textarea>
                 </div>
+                
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            Findings and Recommendation
+                            Findings
                         </div>
                     </div>
-                    <input className="form-control"
-                    name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_find_recc}
-                    onChange={handleInputChange}/>
+                    <textarea class="form-control" rows="3" name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_find_recc}
+                    onChange={handleInputChange}></textarea>
                 </div>
 
                 
-        
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 
+            
 
 
         </form> //FORM

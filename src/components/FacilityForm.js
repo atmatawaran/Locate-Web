@@ -67,10 +67,10 @@ const FacilityForm = (props) => {
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            <i className="fas fa-user"></i>
+                            ID
                         </div>
                     </div>
-                    <input className="form-control" placeholder="Facility Name" 
+                    <input className="form-control"
                     name="fac_id" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_id}
                     onChange={handleInputChange}/>
                 </div>
@@ -78,10 +78,10 @@ const FacilityForm = (props) => {
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            <i className="fas fa-user"></i>
+                            Type
                         </div>
                     </div>
-                    <input className="form-control" placeholder="Facility Type" 
+                    <input className="form-control"
                     name="fac_type" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_type}
                     onChange={handleInputChange}/>
                 </div>
@@ -90,23 +90,22 @@ const FacilityForm = (props) => {
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            <i className="fas fa-user"></i>
+                            Facility Info
                         </div>
                     </div>
-                    <input className="form-control" placeholder="Facility Info" 
-                    name="fac_info" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_info}
-                    onChange={handleInputChange}/>
+                    <textarea class="form-control" rows="2" name="fac_info" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_info}
+                    onChange={handleInputChange}></textarea>
                 </div>
+
 
                 <div className="form-group input-group">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
-                            <i className="fas fa-user"></i>
+                            Address
                         </div>
                     </div>
-                    <input className="form-control" placeholder="Facility Address" 
-                    name="fac_address" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_address}
-                    onChange={handleInputChange}/>
+                    <textarea class="form-control" rows="3"  name="fac_address" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_address}
+                    onChange={handleInputChange}></textarea>
                 </div>
         
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 

@@ -41,7 +41,7 @@ const UserForm = (props) => {
     }
 
     return (
-        <form autoComplete="off" onSubmit={handleFormSubmit}>
+        <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}>
             
             <div className="form-row">
                 <div className="form-group input-group col-md-6">

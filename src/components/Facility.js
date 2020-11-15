@@ -56,11 +56,12 @@ const Facility = () => {
 
     return(
     <>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4" text-center>Manage Facilities</h1>
-            </div>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <b><h2> Manage Facilities </h2></b>
+            </ol>
+        </nav>
+
         <div className="row">
             <div className="col-md-5">
                 <FacilityForm {...({addOrEdit,currentId,facilityObjects,disabled})}/>

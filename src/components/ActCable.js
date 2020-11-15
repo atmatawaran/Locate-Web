@@ -59,11 +59,12 @@ const ActCable = () => {
 
     return(
     <>
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <h1 class="display-4" text-center>Manage Cable Activities</h1>
-            </div>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <b><h2> Manage Cable Activities </h2></b>
+            </ol>
+        </nav>
+
         <div className="row">
             <div className="col-md-5">
                 <ActCable_Form {...({addOrEdit,currentId,cableObjects,disabled})}/>
