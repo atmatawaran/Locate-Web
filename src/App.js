@@ -7,6 +7,7 @@ import './App.css'
 import ActCable from './components/ActCable';
 import ActManhole from './components/ActManhole';
 import ActCabinet from './components/ActCabinet';
+import ActPole from './components/ActPole';
 
 function App(){
   return(
@@ -18,6 +19,7 @@ function App(){
           <Route exact path="/activity-cable" component={ActCable}/>
           <Route exact path="/activity-manhole" component={ActManhole} />
           <Route exact path="/activity-cabinet" component={ActCabinet} />
+          <Route exact path="/activity-pole" component={ActPole} />
         </div>
     </div>
     </Router>

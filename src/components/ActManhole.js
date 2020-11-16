@@ -49,8 +49,13 @@ const ActManhole = () => {
         }
     }
 
-    const onDelete = id =>{
+    const onDelete = (id,act_no) =>{
         if(window.confirm("Delete this document?")){
+
+            db.collection('activities') .where('activity_no', '==', act_no).get().then(querySnapshot => {
+                querySnapshot.docs[0].ref.delete();
+            });
+
             db.collection('activities_mh').doc(id).delete().then(function() {
                 console.log("Document successfully deleted!");
             });
@@ -88,7 +93,7 @@ const ActManhole = () => {
                                     {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
                                         <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>
                                         {/* function(event){ func1(); func2()} */}
-                                        <a className="btn btn-danger"  onClick={()=> {onDelete(manholeObjects[id].id)}}>Delete</a>
+                                        <a className="btn btn-danger"  onClick={()=> {onDelete(manholeObjects[id].id, manholeObjects[id].activity_no)}}>Delete</a>
                                     </td>
                                 </tr>
                             })
