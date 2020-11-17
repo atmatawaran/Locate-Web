@@ -92,103 +92,74 @@ const ActCabinet_Form = (props) => {
                     name="activity_type" disabled = "true" value={values.activity_type}
                     onChange={handleInputChange}/>
                 </div>
-                </div>
+            </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cabinet Door
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Cabinet Door</label>
+                        <input className="form-control"
                     name="cab_door" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_door}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Terminal Strips
-                        </div>
                     </div>
-                    <input className="form-control"
+                    <div class="form-group col-md-6">
+                        <label>Terminal Strips</label>
+                        <input className="form-control"
                     name="cab_terminal" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_terminal}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Jumper Writing
-                        </div>
-                    </div>
-                    <input className="form-control"
-                    name="cab_jumper" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_jumper}
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Jumper Wiring</label>
+                        <input className="form-control"
+                    name="cab_door" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_door}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Locking Mechanism Good?
-                        </div>
                     </div>
-                    <input className="form-control"
-                    name="cab_lock" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_lock}
+                    <div class="form-group col-md-6">
+                        <label>Locking Mechanism Good</label>
+                        <input className="form-control"
+                    name="cab_terminal" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_terminal}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Port Holes with Sealing?
-                        </div>
-                    </div>
-                    <input className="form-control"
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Port Holes with Sealing</label>
+                        <input className="form-control"
                     name="cab_port" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_port}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Grounding Cables Installed?
-                        </div>
                     </div>
-                    <input className="form-control"
+                    <div class="form-group col-md-6">
+                        <label>Grounding Cables Installed</label>
+                        <input className="form-control"
                     name="cab_ground" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_ground}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            One Voice Operations Center
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>One Voice Operations Center</label>
+                        <input className="form-control"
                     name="cab_ovoc" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_ovoc}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Remarks
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_remarks}
+
+                <div class="form-group">
+                    <label for="inputAddress">Remarks</label>
+                    <textarea class="form-control" rows="1" name="cab_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_remarks}
                     onChange={handleInputChange}></textarea>
                 </div>
-                
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Findings
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_find_recc}
+                <div class="form-group">
+                    <label for="inputAddress">Findings and Recommendation</label>
+                    <textarea class="form-control" rows="1" name="cab_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_find_recc}
                     onChange={handleInputChange}></textarea>
                 </div>
 

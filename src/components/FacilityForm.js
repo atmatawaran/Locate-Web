@@ -62,7 +62,9 @@ const FacilityForm = (props) => {
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
-            
+
+
+
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
@@ -70,8 +72,7 @@ const FacilityForm = (props) => {
                             ID
                         </div>
                     </div>
-                    <input className="form-control"
-                    name="fac_id" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_id}
+                    <input class="form-control" name="fac_id" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_id}
                     onChange={handleInputChange}/>
                 </div>
 
@@ -81,30 +82,21 @@ const FacilityForm = (props) => {
                             Type
                         </div>
                     </div>
-                    <input className="form-control"
-                    name="fac_type" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_type}
+                    <input class="form-control"name="fac_type" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_type}
                     onChange={handleInputChange}/>
                 </div>
-                </div>
+            </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Facility Info
-                        </div>
-                    </div>
+
+                <div class="form-group">
+                    <label for="inputAddress">Facility Info</label>
                     <textarea class="form-control" rows="2" name="fac_info" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_info}
                     onChange={handleInputChange}></textarea>
                 </div>
 
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Address
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3"  name="fac_address" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_address}
+                <div class="form-group">
+                    <label for="inputAddress">Facility Addresss</label>
+                    <textarea class="form-control" rows="2"  name="fac_address" disabled = {(props.disabled)? "disabled" : ""} value={values.fac_address}
                     onChange={handleInputChange}></textarea>
                 </div>
         

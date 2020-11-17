@@ -67,7 +67,8 @@ const ActCable_Form = (props) => {
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
-        
+
+
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
@@ -90,85 +91,57 @@ const ActCable_Form = (props) => {
                     name="activity_type" disabled = "true" value={values.activity_type}
                     onChange={handleInputChange}/>
                 </div>
-                </div>
+            </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Owner
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="inputAddress">Owner</label>
                     <input className="form-control"
                     name="cable_owner" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_owner}
                     onChange={handleInputChange}/>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cable Condition
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Cable Condition</label>
+                        <input className="form-control"
                     name="cable_cond" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_cond}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Clear from Obstruction?
-                        </div>
                     </div>
-                    <input className="form-control"
+                    <div class="form-group col-md-6">
+                        <label>Clear from Obstruction</label>
+                        <input className="form-control"
                     name="cable_clear_obst" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_clear_obst}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cable Low Sagged?
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Cable Low Sagged (5m)</label>
+                        <input className="form-control"
                     name="cable_low_sag" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_low_sag}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Exposed Bridge?
-                        </div>
                     </div>
-                    <input className="form-control"
+                    <div class="form-group col-md-6">
+                        <label>Exposed Bridge UG Cable</label>
+                        <input className="form-control"
                     name="cable_exposed" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_exposed}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Remarks
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_remarks}
-                    onChange={handleInputChange}></textarea>
-                </div>
-                
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Findings
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_find_recc}
+                <div class="form-group">
+                    <label for="inputAddress">Remarks</label>
+                    <textarea class="form-control" rows="1" name="cable_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_remarks}
                     onChange={handleInputChange}></textarea>
                 </div>
 
-                
+                <div class="form-group">
+                    <label for="inputAddress">Findings and Recommendation</label>
+                    <textarea class="form-control" rows="1" name="cable_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.cable_find_recc}
+                    onChange={handleInputChange}></textarea>
+                </div>
+
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 
             
 

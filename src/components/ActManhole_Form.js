@@ -66,7 +66,7 @@ const ActManhole_Form = (props) => {
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
         
-            <div className="form-row">
+        <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
@@ -88,62 +88,43 @@ const ActManhole_Form = (props) => {
                     name="activity_type" disabled = "true" value={values.activity_type}
                     onChange={handleInputChange}/>
                 </div>
-                </div>
+            </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cover Condition
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Manhole Cover Condition</label>
+                        <input className="form-control"
                     name="mh_cover" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_cover}
                     onChange={handleInputChange}/>
-                </div>
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Right of Way
-                        </div>
                     </div>
-                    <input className="form-control"
+                    <div class="form-group col-md-6">
+                        <label>Right of Way (side of the street)</label>
+                        <input className="form-control"
                     name="mh_row" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_row}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Cover Lock
-                        </div>
-                    </div>
-                    <input className="form-control"
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Manhole Cover Lock</label>
+                        <input className="form-control"
                     name="mh_lock" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_lock}
                     onChange={handleInputChange}/>
+                    </div>
                 </div>
 
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Remarks
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="mh_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_remarks}
-                    onChange={handleInputChange}></textarea>
-                </div>
-                
-
-                <div className="form-group input-group">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            Findings
-                        </div>
-                    </div>
-                    <textarea class="form-control" rows="3" name="mh_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_find_recc}
+                <div class="form-group">
+                    <label for="inputAddress">Remarks</label>
+                    <textarea class="form-control" rows="1" name="mh_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_remarks}
                     onChange={handleInputChange}></textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="inputAddress">Findings and Recommendation</label>
+                    <textarea class="form-control" rows="1" name="mh_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.mh_find_recc}
+                    onChange={handleInputChange}></textarea>
+                </div>
                 
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 
             

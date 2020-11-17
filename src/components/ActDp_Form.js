@@ -1,24 +1,34 @@
 import React, {useState, useEffect} from "react";
-import Scrollspy from 'react-scrollspy'
 
-
-const ActPole_Form = (props) => {
+const ActDp_Form = (props) => {
     const initialFieldValues = {
         activity_no: "",
         activity_type: "",
-        pole_owner: "",
-        pole_type: "",
-        pole_struct: "",
-        pole_vertical_align: "",
-        pole_guying: "",
-        pole_secured: "",
-        pole_primary: "",
-        pole_secondary: "",
-        pole_vertical_clear: "",
-        pole_proper: "",
-        pole_3rd: "",
-        pole_remarks: "",
-        pole_find_recc: ""
+
+        dp_main_cable: "",
+        dp_sub_cable: "",
+
+        dp_proper: "",
+        dp_standard: "",
+
+        dp_intact: "",
+        dp_lock: "",
+
+        dp_bridle: "",
+        dp_splice: "",
+
+        dp_rubber: "",
+        dp_infest: "",
+
+        dp_tagging: "",
+        dp_lcp_install: "",
+
+        dp_inside: "",
+        dp_box: "",
+
+        dp_remarks: "",
+        dp_find_recc: ""
+        
     }
 
     var[values,setValues] = useState(initialFieldValues);
@@ -33,11 +43,11 @@ const ActPole_Form = (props) => {
         else{
             // populating the form fields
             setValues({
-                ...props.poleObjects[props.currentId]
+                ...props.dpObjects[props.currentId]
             })
         }
         
-    },[props.currentId,props.poleObjects]);
+    },[props.currentId,props.dpObjects]);
     
 
     // when the form is changed
@@ -74,10 +84,9 @@ const ActPole_Form = (props) => {
     }
 
     return (
-
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
-    
-            <div className="form-row">
+        
+        <div className="form-row">
                 <div className="form-group input-group col-md-6">
                     <div className="input-group-prepend">
                         <div className="input-group-text">
@@ -99,66 +108,34 @@ const ActPole_Form = (props) => {
                     name="activity_type" disabled = "true" value={values.activity_type}
                     onChange={handleInputChange}/>
                 </div>
-                </div>
+            </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Owner</label>
+                        <label>Main cable Installation</label>
                         <input className="form-control"
-                    name="pole_owner" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_owner}
+                    name="dp_main_cable" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_main_cable}
                     onChange={handleInputChange}/>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Pole Type</label>
+                        <label>Subscriber Cable Installation</label>
                         <input className="form-control"
-                    name="pole_type" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_type}
-                    onChange={handleInputChange}/>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Structure Integrity</label>
-                        <input className="form-control"
-                    name="pole_struct" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_struct}
-                    onChange={handleInputChange}/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Vertical Alignment (90-180)</label>
-                        <input className="form-control"
-                    name="pole_vertical_align" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_vertical_align}
+                    name="dp_sub_cable" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_sub_cable}
                     onChange={handleInputChange}/>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>With Guying</label>
+                        <label>Proper Attachment to Pole</label>
                         <input className="form-control"
-                    name="pole_guying" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_guying}
+                    name="dp_proper" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_proper}
                     onChange={handleInputChange}/>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Secured and Properly Grounded</label>
+                        <label>With Standard Stencil</label>
                         <input className="form-control"
-                    name="pole_secured" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_secured}
-                    onChange={handleInputChange}/>
-                    </div>
-                </div>
-
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>(Right of Way) Primary Road</label>
-                        <input className="form-control"
-                    name="pole_primary" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_primary}
-                    onChange={handleInputChange}/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>(Right of Way) Secondary Road</label>
-                        <input className="form-control"
-                    name="pole_secondary" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_secondary}
+                    name="dp_standard" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_standard}
                     onChange={handleInputChange}/>
                     </div>
                 </div>
@@ -166,54 +143,98 @@ const ActPole_Form = (props) => {
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Vertical Clearance is 18ft</label>
+                        <label>With Intact Cover</label>
                         <input className="form-control"
-                    name="pole_vertical_clear" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_vertical_clear}
+                    name="dp_intact" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_intact}
                     onChange={handleInputChange}/>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Proper Attachment (Ally/Extension)</label>
+                        <label>Locking Mechanism Good</label>
                         <input className="form-control"
-                    name="pole_proper" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_proper}
+                    name="dp_lock" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_lock}
                     onChange={handleInputChange}/>
                     </div>
                 </div>
-
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>With 3rd Party Attachment</label>
+                        <label>With Six Bridle Rings</label>
                         <input className="form-control"
-                    name="pole_3rd" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_3rd}
+                    name="dp_bridle" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_bridle}
+                    onChange={handleInputChange}/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Splice Tray Intact</label>
+                        <input className="form-control"
+                    name="dp_splice" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_splice}
                     onChange={handleInputChange}/>
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>With Rubber Grommet</label>
+                        <input className="form-control"
+                    name="dp_rubber" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_rubber}
+                    onChange={handleInputChange}/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>With Infestation</label>
+                        <input className="form-control"
+                    name="dp_infest" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_infest}
+                    onChange={handleInputChange}/>
+                    </div>
+                </div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Subscriner Drop Cable Tag</label>
+                        <input className="form-control"
+                    name="dp_tagging" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_tagging}
+                    onChange={handleInputChange}/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>LCP/NAP not installed</label>
+                        <input className="form-control"
+                    name="dp_lcp_install" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_lcp_install}
+                    onChange={handleInputChange}/>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Inside Box Wiring Status</label>
+                        <input className="form-control"
+                    name="dp_inside" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_inside}
+                    onChange={handleInputChange}/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Box Condition</label>
+                        <input className="form-control"
+                    name="dp_box" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_box}
+                    onChange={handleInputChange}/>
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="inputAddress">Remarks</label>
-                    <textarea class="form-control" rows="1" name="pole_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_remarks}
+                    <textarea class="form-control" rows="1" name="dp_remarks" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_remarks}
                     onChange={handleInputChange}></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="inputAddress">Findings and Recommendation</label>
-                    <textarea class="form-control" rows="1" name="pole_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.pole_find_recc}
+                    <textarea class="form-control" rows="1" name="dp_find_recc" disabled = {(props.disabled)? "disabled" : ""} value={values.dp_find_recc}
                     onChange={handleInputChange}></textarea>
                 </div>
-
                 
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 
+            
 
-        
 
-        </form> 
-
-    
-
+        </form> //FORM
 
     );
 }
 
-export default ActPole_Form;
+export default ActDp_Form;
