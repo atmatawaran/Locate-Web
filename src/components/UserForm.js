@@ -2,12 +2,17 @@ import React, {useState, useEffect} from "react";
 
 const UserForm = (props) => {
     const initialFieldValues = {
+        user_first_name:"",
+        user_last_name:"",
         user_username: "",
         user_email: "",
         user_password: "",
+        icon: null
     }
 
     var[values,setValues] = useState(initialFieldValues);
+    var[origPassword,setOrigPassword] = useState();
+    var[origEmail,setEmail] = useState();
 
     // edit or delete
     useEffect(()=>{
@@ -21,6 +26,8 @@ const UserForm = (props) => {
             setValues({
                 ...props.userObjects[props.currentId]
             })
+            setOrigPassword(props.userObjects[props.currentId].user_password);
+            setEmail(props.userObjects[props.currentId].user_email);
         }
         
     },[props.currentId,props.userObjects]);
@@ -35,52 +42,74 @@ const UserForm = (props) => {
     }
 
     const handleFormSubmit = e => {
-        e.preventDefault();
-        props.addOrEdit(values); // pass values to 
-        console.log(values);
+        var flag = 0;
+            // checks if there is an empty field in the form
+            for (let k in values) {
+                if (values[k] === "") {
+                    alert("Complete your info!");
+                    flag = 1;
+                    break;
+                }
+            }
+
+            if(flag === 0){ //if all the fields have values
+                e.preventDefault();
+                props.addOrEdit(values, origPassword, origEmail); // pass values to 
+                console.log(values);
+            }
     }
 
     return (
-        <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}>
-            
-            <div className="form-row">
-                <div className="form-group input-group col-md-6">
-                    <div className="input-group-prepend">
-                    <span class="input-group-text">@</span>
+
+        <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
+
+            <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Username</label>
+                        <input className="form-control" 
+                    name="user_username" disabled = {(props.disabled)? "" : "disabled"} value={values.user_username}
+                    onChange={handleInputChange}/>
                     </div>
-                    <input className="form-control" placeholder="User Name" 
-                    name="user_username" value={values.user_username}
-                    onChange={handleInputChange} required/>
+                    <div class="form-group col-md-6">
+                        <label>Password</label>
+                        <input className="form-control" 
+                    name="user_password" value={values.user_password} onChange={handleInputChange}/>
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                        Must be 8-20 characters long.
+                        </small>
+                    </div>
                 </div>
 
-                <div className="form-group input-group col-md-6">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            <i className="fas fa-user"></i>
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>First Name</label>
+                        <input className="form-control"
+                    name="user_first_name" value={values.user_first_name}
+                    onChange={handleInputChange}/>
                     </div>
-                    <input className="form-control" placeholder="User Email" 
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input className="form-control"
+                    name="user_last_name" value={values.user_last_name}
+                    onChange={handleInputChange}/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="inputAddress">Email</label>
+                    <input className="form-control"
                     name="user_email" value={values.user_email}
-                    onChange={handleInputChange} required/>
+                    onChange={handleInputChange}/>
                 </div>
 
-                <div className="form-group input-group col-md-6">
-                    <div className="input-group-prepend">
-                        <div className="input-group-text">
-                            <i className="fas fa-user"></i>
-                        </div>
-                    </div>
-                    <input className="form-control" placeholder="User Password" 
-                    name="user_password" value={values.user_password}
-                    onChange={handleInputChange} required/>
-                </div>
-                </div>
 
-                
-                        <input type="submit" value={props.currentId==""?"Save":"Update"} className="btn btn-primary btn-block"/> 
+
+                <input type="submit" value={props.currentId==""?"Add":"Update"} className="btn btn-primary btn-block"/> 
+            
 
 
         </form> //FORM
+
 
     );
 }
