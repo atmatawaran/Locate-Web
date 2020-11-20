@@ -9,6 +9,7 @@ import ActManhole from './components/ActManhole';
 import ActCabinet from './components/ActCabinet';
 import ActPole from './components/ActPole';
 import ActDp from './components/ActDp';
+import Map from './components/Map'
 
 function App(){
   return(
@@ -22,6 +23,7 @@ function App(){
           <Route exact path="/activity-cabinet" component={ActCabinet} />
           <Route exact path="/activity-pole" component={ActPole} />
           <Route exact path="/activity-dp" component={ActDp} />
+          <Route exact path="/map" component={Map} />
         </div>
     </div>
     </Router>
