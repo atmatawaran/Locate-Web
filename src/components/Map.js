@@ -1,4 +1,9 @@
 import React, {useState, useEffect, useCallback, useRef} from "react";
+import cab_marker from "../cab_marker.svg";
+import cable_marker from "../cable_marker.svg";
+import dp_marker from "../dp_marker.svg";
+import mh_marker from "../mh_marker.svg";
+import pole_marker from "../pole_marker.svg";
 import './Map.css'
 import {
     GoogleMap,
@@ -79,6 +84,15 @@ export default function Map(){
             key={facility.fac_id}
             position={new window.google.maps.LatLng(parseFloat(facility.fac_gps.latitude),parseFloat(facility.fac_gps.longitude))}
             onLoad={onLoad}
+            icon={{
+              url: facility.fac_type === "Cabinet" ? cab_marker: 
+                    facility.fac_type === "Cable" ? cable_marker: 
+                    facility.fac_type === "DP/LCP/NAP" ? dp_marker: 
+                    facility.fac_type === "Manhole" ? mh_marker: pole_marker,
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+              scaledSize: new window.google.maps.Size(40, 40),
+            }}
             onClick={() => setSelected(facility)}
           />
         ))}
