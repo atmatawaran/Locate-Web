@@ -90,8 +90,8 @@ export default function Map(){
                     facility.fac_type === "DP/LCP/NAP" ? dp_marker: 
                     facility.fac_type === "Manhole" ? mh_marker: pole_marker,
               origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-              scaledSize: new window.google.maps.Size(40, 40),
+              anchor: new window.google.maps.Point(25, 25),
+              scaledSize: new window.google.maps.Size(50, 50),
             }}
             onClick={() => setSelected(facility)}
           />
