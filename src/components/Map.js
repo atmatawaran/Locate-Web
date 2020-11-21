@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect, useCallback, useRef} from "react";
+import './Map.css'
 import {
     GoogleMap,
     useLoadScript,
@@ -6,6 +7,7 @@ import {
     InfoWindow
 } from "@react-google-maps/api";
 import { formatRelative } from "date-fns";
+import { db, auth } from "./firebase";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -18,7 +20,38 @@ const center = {
     lng: 121.269638
 }
 
+const options = {
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
+
 export default function Map(){
+
+    const [facilities,setFacilities] = useState([]);
+    const [markers, setMarkers] = useState([]);
+
+    useEffect(() =>{
+        db.collection("facilities").onSnapshot(function(data){
+            console.log(data);
+            setFacilities(data.docs.map(doc => ({
+                ...doc.data(),
+            })))
+        })
+    },[])
+
+    Object.keys(facilities).map(id =>{
+        console.log(facilities[id].fac_id)
+    })
+
+    const onLoad = marker => {
+        console.log('marker: ', marker.position)
+    }
+
+    const mapRef = useRef();
+    const onMapLoad = useCallback((map) => {
+      mapRef.current = map;
+    }, []);
+
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -32,11 +65,23 @@ export default function Map(){
 
     return (
     <div>
+        <h2> Locate Web </h2>
         <GoogleMap 
             mapContainerStyle={mapContainerStyle}
             zoom={13}
-            center={center}>
-            </GoogleMap>
+            center={center}
+            options={options}
+            onLoad={onMapLoad}>
+
+        {facilities.map((facility) => (
+          <Marker
+            key={facility.fac_id}
+            position={new window.google.maps.LatLng(parseFloat(facility.fac_gps.latitude),parseFloat(facility.fac_gps.longitude))}
+            onLoad={onLoad}
+          />
+        ))}
+      
+      </GoogleMap>
     </div>
     );
 }
