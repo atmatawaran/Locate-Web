@@ -6,10 +6,12 @@ import dp_marker from "../dp_marker.svg";
 import mh_marker from "../mh_marker.svg";
 import pole_marker from "../pole_marker.svg";
 
+import FacilityForm from "./FacilityForm.js";
+
 import trash from "../trash.svg";
 import edit from "../edit.svg";
 
-import { Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
+import { Button, Dropdown, DropdownButton, ButtonGroup, Modal } from 'react-bootstrap';
 
 import './Map.css'
 import {
@@ -41,9 +43,10 @@ export default function Map(){
 
     const [facilities,setFacilities] = useState([]);
     var [facilityObjects,setFacilityObjects] = useState({}); // for table
-    const [markers, setMarkers] = useState([]);
-    const [cable,setCable] = useState([]);
     const [selected, setSelected] = useState(null);
+    const [show, setShow] = useState(false);
+    var [currentId, setCurrentId] = useState('');
+    var [disabled, setDisabled] = useState(true);
 
     useEffect(() =>{
         db.collection("facilities").onSnapshot(function(data){
@@ -69,6 +72,32 @@ export default function Map(){
         db.collection('facilities').doc(id).delete().then(function() {
             console.log("Document successfully deleted!");
         });
+    }
+  }
+
+  const addOrEdit = obj => {
+    if(currentId == ''){
+        db.collection('facilities').add(obj).then(function() {
+            console.log(currentId)
+            console.log("Document successfully added!");
+            setCurrentId('')
+        });
+        console.log("added")
+    }
+    else{
+        db.collection('facilities').doc(facilityObjects[currentId].id)
+        .update({
+            fac_id: obj.fac_id,
+            fac_type: obj.fac_type,
+            fac_info: obj.fac_info,
+            fac_address: obj.fac_address
+        
+        })
+        .then(function() {
+            console.log("Document successfully updated!");
+            setCurrentId('')
+        });
+
     }
 }
 
@@ -167,7 +196,7 @@ export default function Map(){
                           <td>{facilityObjects[id].fac_id}</td>
                           <td>{facilityObjects[id].fac_type}</td>
                           <td>
-                              <a style={{marginRight: 20}} className="btn btn-primary"><img class="tableicon" src={edit}></img></a>
+                              <a className="btn btn-primary" style={{marginRight: 20}} onClick={ function(event){ setCurrentId(id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
                               <a className="btn btn-danger"  onClick={()=> {onDelete(facilityObjects[id].id)}}><img class="tableicon" src={trash}></img></a>
                             </td>
                                 </tr>
@@ -176,6 +205,12 @@ export default function Map(){
                     </tbody>
                 </table>
             </div>
+                      
+            <Modal show={show}>
+              <Modal.Header> <h3> Edit Facility </h3> <Button variant="secondary" onClick={() => setShow(false)}> Close </Button> </Modal.Header>
+              <Modal.Body> <FacilityForm {...({addOrEdit,currentId,facilityObjects,disabled})}/> </Modal.Body>
+            </Modal>
+
         </div>
     </div>
     );

@@ -24,7 +24,7 @@ function App(){
           <Route exact path="/activity-cabinet" component={ActCabinet} />
           <Route exact path="/activity-pole" component={ActPole} />
           <Route exact path="/activity-dp" component={ActDp} />
-          <Route exact path="/map" component={Map} />
+          <Route exact path="/" component={Map} />
         </div>
     </div>
     </Router>

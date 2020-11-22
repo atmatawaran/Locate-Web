@@ -61,7 +61,7 @@ const FacilityForm = (props) => {
     }
 
     return (
-        <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 50, marginRight: 20}}> 
+        <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 20, marginRight: 20, marginBottom: 20}}> 
 
 
 
