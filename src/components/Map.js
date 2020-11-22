@@ -11,7 +11,7 @@ import FacilityForm from "./FacilityForm.js";
 import trash from "../trash.svg";
 import edit from "../edit.svg";
 
-import { Button, Dropdown, DropdownButton, ButtonGroup, Modal } from 'react-bootstrap';
+import { Button, Dropdown, DropdownButton, ButtonGroup, Modal, Table} from 'react-bootstrap';
 
 import './Map.css'
 import {
@@ -181,7 +181,7 @@ export default function Map(){
 
             {/* 2nd column */}
             <div className="col-md-4 tableinfo"> 
-                <table className="table table-borderless table-stripped">
+              <Table striped bordered hover size="sm">
                     <thead className="thead-light">
                         <tr>
                             <th> Facility Name </th>
@@ -196,14 +196,14 @@ export default function Map(){
                           <td>{facilityObjects[id].fac_id}</td>
                           <td>{facilityObjects[id].fac_type}</td>
                           <td>
-                              <a className="btn btn-primary" style={{marginRight: 20}} onClick={ function(event){ setCurrentId(id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
+                              <a className="btn btn-primary" style={{marginRight: 10}} onClick={ function(event){ setCurrentId(id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
                               <a className="btn btn-danger"  onClick={()=> {onDelete(facilityObjects[id].id)}}><img class="tableicon" src={trash}></img></a>
                             </td>
                                 </tr>
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
                       
             <Modal show={show}>
