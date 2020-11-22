@@ -161,11 +161,11 @@ export default function Map(){
                               setSelected(null);
                             }}>
                   <div>
-                    <h6> {selected.fac_id} </h6>
+                    <h5> {selected.fac_id} </h5>
                     <p> <img class="location" src={location_pin}></img> {selected.fac_address} </p>
                     <p> {selected.fac_info} </p>
-                    <a className="btn btn-primary" style={{marginRight: 10}} onClick={ function(event){ setCurrentId(selected.fac_id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
-                    <a className="btn btn-danger"  onClick={()=> {onDelete(selected.id)}}><img class="tableicon" src={trash}></img></a>
+                    <a className="btn btn-primary btnoptions" style={{marginRight: 10}} onClick={ function(event){ setCurrentId(selected.fac_id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
+                    <a className="btn btn-danger btnoptions"  onClick={()=> {onDelete(selected.id)}}><img class="tableicon" src={trash}></img></a>
                   </div>
                 </InfoWindow>): null}
               </GoogleMap>

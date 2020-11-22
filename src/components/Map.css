@@ -30,23 +30,14 @@ p {
     margin: 10px;
 }
 
-.tableinfo {
-    clear: both;
-    float: right;
-}
-
 .tableicon {
-    height: 15px;
+    height: 13px;
     position: relative;
     transform: translateY(-20%);
 }
 
-td {
-    text-align: center;
-    vertical-align: middle;
-  }
-
-th {
-    text-align: center;
-    vertical-align: middle;
-  }
+.btnoptions {
+    float: right;
+    margin-left: 5px;
+    font-size: 10px;
+}
