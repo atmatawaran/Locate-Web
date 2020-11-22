@@ -25,7 +25,7 @@ import { db, auth } from "./firebase";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    width: '68vw',
+    width: '100vw',
     height: '100vh'
 }
 
@@ -42,7 +42,6 @@ const options = {
 export default function Map(){
 
     const [facilities,setFacilities] = useState([]);
-    var [facilityObjects,setFacilityObjects] = useState({}); // for table
     const [selected, setSelected] = useState(null);
     const [show, setShow] = useState(false);
     var [currentId, setCurrentId] = useState('');
@@ -53,19 +52,10 @@ export default function Map(){
             console.log(data);
             setFacilities(data.docs.map(doc => ({
                 ...doc.data(),
+                id:doc.id
             })))
         })
     },[])
-
-    useEffect(() =>{
-      db.collection("facilities").onSnapshot(function(data){
-          console.log(data);
-          setFacilityObjects(data.docs.map(doc => ({
-              ...doc.data(),
-              id:doc.id
-          })))
-      })
-  },[])
 
   const onDelete = id =>{
     if(window.confirm("Delete this document?")){
@@ -85,7 +75,7 @@ export default function Map(){
         console.log("added")
     }
     else{
-        db.collection('facilities').doc(facilityObjects[currentId].id)
+        db.collection('facilities').doc(selected.id)
         .update({
             fac_id: obj.fac_id,
             fac_type: obj.fac_type,
@@ -174,41 +164,16 @@ export default function Map(){
                     <h6> {selected.fac_id} </h6>
                     <p> <img class="location" src={location_pin}></img> {selected.fac_address} </p>
                     <p> {selected.fac_info} </p>
+                    <a className="btn btn-primary" style={{marginRight: 10}} onClick={ function(event){ setCurrentId(selected.fac_id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
+                    <a className="btn btn-danger"  onClick={()=> {onDelete(selected.id)}}><img class="tableicon" src={trash}></img></a>
                   </div>
                 </InfoWindow>): null}
               </GoogleMap>
             </div> 
-
-            {/* 2nd column */}
-            <div className="col-md-4 tableinfo"> 
-              <Table striped bordered hover size="sm">
-                    <thead className="thead-light">
-                        <tr>
-                            <th> Facility Name </th>
-                            <th> Facility Type </th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                      Object.keys(facilityObjects).map(id =>{
-                        return <tr key={id}>
-                          <td>{facilityObjects[id].fac_id}</td>
-                          <td>{facilityObjects[id].fac_type}</td>
-                          <td>
-                              <a className="btn btn-primary" style={{marginRight: 10}} onClick={ function(event){ setCurrentId(id); setDisabled(false); setShow(true)} }><img class="tableicon" src={edit}></img></a>
-                              <a className="btn btn-danger"  onClick={()=> {onDelete(facilityObjects[id].id)}}><img class="tableicon" src={trash}></img></a>
-                            </td>
-                                </tr>
-                            })
-                        }
-                    </tbody>
-                </Table>
-            </div>
                       
             <Modal show={show}>
               <Modal.Header> <h3> Edit Facility </h3> <Button variant="secondary" onClick={() => setShow(false)}> Close </Button> </Modal.Header>
-              <Modal.Body> <FacilityForm {...({addOrEdit,currentId,facilityObjects,disabled})}/> </Modal.Body>
+              <Modal.Body> <FacilityForm {...({addOrEdit,currentId,facilities,disabled})}/> </Modal.Body>
             </Modal>
 
         </div>

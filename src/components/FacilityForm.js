@@ -19,12 +19,16 @@ const FacilityForm = (props) => {
         }
         else{
             // populating the form fields
-            setValues({
-                ...props.facilityObjects[props.currentId]
+            props.facilities.map((facility) => {
+                if(facility.fac_id === props.currentId){
+                    setValues({
+                        ...facility
+                    })
+                }
             })
         }
         
-    },[props.currentId,props.facilityObjects]);
+    },[props.currentId,props.facilities]);
     
 
     // when the form is changed
@@ -62,8 +66,6 @@ const FacilityForm = (props) => {
 
     return (
         <form autoComplete="off" onSubmit={handleFormSubmit} style={{marginLeft: 20, marginRight: 20, marginBottom: 20}}> 
-
-
 
             <div className="form-row">
                 <div className="form-group input-group col-md-6">
