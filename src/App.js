@@ -3,6 +3,7 @@ import {BrowserRouter as Router,Route} from "react-router-dom";
 import Facility from './components/Facility';
 import User from './components/User';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
 import ActCable from './components/ActCable';
 import ActManhole from './components/ActManhole';

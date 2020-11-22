@@ -1,4 +1,4 @@
-h2 {
+h4 {
     position: absolute;
     top: 1rem;
     left: 1rem;
@@ -6,4 +6,37 @@ h2 {
     margin: 0;
     padding: 10px;
     background-color: #ffffff;
+}
+
+p {
+    width: 200px
+}
+
+.location {
+    height: 10px;
+    position: relative;
+    transform: translateY(-30%);
+}
+
+.filter {
+    height: 50px;
+    float: right;
+    margin: 10px;
+    position: relative;
+}
+
+.dropdown {
+    float: right;
+    margin: 10px;
+}
+
+.tableinfo {
+    clear: both;
+    float: right;
+}
+
+.tableicon {
+    height: 15px;
+    position: relative;
+    transform: translateY(-20%);
 }
