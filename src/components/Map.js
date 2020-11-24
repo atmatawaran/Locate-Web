@@ -6,6 +6,8 @@ import dp_marker from "../dp_marker.svg";
 import mh_marker from "../mh_marker.svg";
 import pole_marker from "../pole_marker.svg";
 
+import compass from "../compass.svg";
+
 import FacilityForm from "./FacilityForm.js";
 
 import trash from "../trash.svg";
@@ -14,16 +16,26 @@ import edit from "../edit.svg";
 import { Button, Dropdown, DropdownButton, ButtonGroup, Modal, Table} from 'react-bootstrap';
 
 import './Map.css'
+
 import {
-    GoogleMap,
-    useLoadScript,
-    Marker,
-    InfoWindow
+    GoogleMap, useLoadScript, Marker, InfoWindow
 } from "@react-google-maps/api";
+
+import usePlacesAutocomplete, {
+  getGeocode,getLatLng,
+} from "use-places-autocomplete";
+
+import {
+  Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption,
+} from "@reach/combobox";
+
+import "@reach/combobox/styles.css"
+
 import { formatRelative } from "date-fns";
 import { db, auth } from "./firebase";
 
 const libraries = ["places"];
+
 const mapContainerStyle = {
     width: '100vw',
     height: '100vh'
@@ -85,6 +97,7 @@ export default function Map(){
         })
         .then(function() {
             console.log("Document successfully updated!");
+            alert("Document successfully updated!");
             setCurrentId('')
         });
 
@@ -104,6 +117,11 @@ export default function Map(){
       mapRef.current = map;
     }, []);
 
+    const panTo = React.useCallback(({lat, lng}) => {
+      mapRef.current.panTo({lat, lng});
+      mapRef.current.setZoom(14);
+    }, []); // no depth
+
     const {isLoaded, loadError} = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
         libraries,
@@ -114,9 +132,13 @@ export default function Map(){
         console.log(process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
         return "Loading maps";
     }
-
     return (
     <div>
+
+      <Search panTo={panTo}/>
+      <Locate panTo={panTo}/>
+
+
         <div className="row">
             {/* 1st column */}
             <div className="col-md-8">
@@ -127,7 +149,7 @@ export default function Map(){
                     options={options}
                     onLoad={onMapLoad}>
 
-                <div class="dropdown">
+                {/* <div class="dropdown">
                 <DropdownButton id="dropdown-item-button" title="Filter Markers">
                   <Dropdown.Item as="button">Show All</Dropdown.Item>
                   <Dropdown.Item as="button">Show Cabinet only</Dropdown.Item>
@@ -136,7 +158,7 @@ export default function Map(){
                   <Dropdown.Item as="button">Show Manhole only</Dropdown.Item>
                   <Dropdown.Item as="button">Show Pole only</Dropdown.Item>
                 </DropdownButton>
-                  </div>
+                  </div> */}
 
                 {facilities.map((facility) => (
                   <Marker
@@ -179,4 +201,72 @@ export default function Map(){
         </div>
     </div>
     );
+}
+
+function Locate({ panTo }){
+  return (
+  <button class="locate" onClick={() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      panTo({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      })
+    },() => null);
+  }}
+  ><img src={compass} width="45" height="45" alt="Locate Me"/></button>
+  )
+}
+
+function Search({ panTo }) {
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 43.6532, lng: () => -79.3832 },
+      radius: 100 * 1000,
+    },
+  });
+
+  const handleInput = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSelect = async (address) => {
+    setValue(address, false);
+    clearSuggestions();
+
+    try {
+      const results = await getGeocode({ address });
+      const { lat, lng } = await getLatLng(results[0]);
+      panTo({ lat, lng });
+    } catch (error) {
+      console.log("😱 Error: ", error);
+    }
+  };
+
+  return (
+    <div className="search">
+      <Combobox onSelect={handleSelect}>
+        <ComboboxInput
+        style={{ width: 400, margin: 0 }}
+          value={value}
+          onChange={handleInput}
+          disabled={!ready}
+          placeholder="Search"
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === "OK" &&
+              data.map(({ id, description }) => (
+                <ComboboxOption key={id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+  );
 }

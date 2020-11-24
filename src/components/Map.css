@@ -13,17 +13,17 @@ p {
 }
 
 .location {
-    height: 10px;
+    height: 12px;
     position: relative;
     transform: translateY(-30%);
 }
 
-.filter {
+/* .filter {
     height: 50px;
     float: right;
     margin: 10px;
     position: relative;
-}
+} */
 
 .dropdown {
     float: right;
@@ -40,4 +40,23 @@ p {
     float: right;
     margin-left: 5px;
     font-size: 10px;
+}
+
+.search{
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%); 
+    /* width: 1000px; */
+    max-width: 400px;
+    z-index: 10;
+}
+
+.locate {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    z-index: 10;
 }
