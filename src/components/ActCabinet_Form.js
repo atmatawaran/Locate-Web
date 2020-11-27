@@ -114,13 +114,13 @@ const ActCabinet_Form = (props) => {
                     <div class="form-group col-md-6">
                         <label>Jumper Wiring</label>
                         <input className="form-control"
-                    name="cab_door" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_door}
+                    name="cab_jumper" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_jumper}
                     onChange={handleInputChange}/>
                     </div>
                     <div class="form-group col-md-6">
                         <label>Locking Mechanism Good</label>
                         <input className="form-control"
-                    name="cab_terminal" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_terminal}
+                    name="cab_lock" disabled = {(props.disabled)? "disabled" : ""} value={values.cab_lock}
                     onChange={handleInputChange}/>
                     </div>
                 </div>
