@@ -7,6 +7,7 @@ const ActPole = () => {
     var [poleObjects,setPoleObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
+    var [input, setInput] = useState("");
 
     // similar to componentDidMount
     useEffect(() =>{
@@ -72,6 +73,17 @@ const ActPole = () => {
     
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setInput(e.target.value)
+    }
+
+    if(input.length > 0) {
+        poleObjects = poleObjects.filter((i) => {
+            return i.addedbyUser.join().includes(input)
+        })
+    }
+
     return(
     <>
         <nav aria-label="breadcrumb">
@@ -85,11 +97,17 @@ const ActPole = () => {
                 <ActPole_Form {...({addOrEdit,currentId,poleObjects,disabled})}/>
             </div>
             <div className="col-md-7">
+
+            <input type="text" 
+                style={{display: "block", "width": "100%", "padding" : "7px", marginBottom : 10}} 
+                placeholder="Search by user"
+                onChange={handleChange}/>
+
                 <table className="table table-borderless table-stripped">
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
-                            <th> Activity Type </th>
+                            <th> Added by </th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -98,7 +116,9 @@ const ActPole = () => {
                             Object.keys(poleObjects).map(id =>{
                                 return <tr key={id}>
                                     <td>{poleObjects[id].activity_no}</td>
-                                    <td>{poleObjects[id].activity_type}</td>
+                                    <td>{poleObjects[id].addedbyUser.map((username, index) =>
+                                        <p style={{margin:0}} key={index}>{username}</p>)
+                                    }</td>
                                     <td>
                                     {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
                                         <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>

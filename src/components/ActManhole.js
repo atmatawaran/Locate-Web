@@ -8,6 +8,7 @@ const ActManhole = () => {
     var [manholeObjects,setManholeObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
+    var [input, setInput] = useState("");
 
     // similar to componentDidMount
     useEffect(() =>{
@@ -62,6 +63,17 @@ const ActManhole = () => {
         }
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setInput(e.target.value)
+    }
+
+    if(input.length > 0) {
+        manholeObjects = manholeObjects.filter((i) => {
+            return i.addedbyUser.join().includes(input)
+        })
+    }
+
     return(
     <>
         <nav aria-label="breadcrumb">
@@ -75,11 +87,17 @@ const ActManhole = () => {
                 <ActManhole_Form {...({addOrEdit,currentId,manholeObjects,disabled})}/>
             </div>
             <div className="col-md-7">
+
+            <input type="text" 
+                style={{display: "block", "width": "100%", "padding" : "7px", marginBottom : 10}} 
+                placeholder="Search by user"
+                onChange={handleChange}/>
+
                 <table className="table table-borderless table-stripped">
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
-                            <th> Activity Type </th>
+                            <th> Added by </th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -88,7 +106,9 @@ const ActManhole = () => {
                             Object.keys(manholeObjects).map(id =>{
                                 return <tr key={id}>
                                     <td>{manholeObjects[id].activity_no}</td>
-                                    <td>{manholeObjects[id].activity_type}</td>
+                                    <td>{manholeObjects[id].addedbyUser.map((username, index) =>
+                                        <p style={{margin:0}} key={index}>{username}</p>)
+                                    }</td>
                                     <td>
                                     {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
                                         <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>
