@@ -7,6 +7,7 @@ const User = (props) => {
     var [userObjects,setUserObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
+    var [input, setInput] = useState("");
 
     // similar to componentDidMount
     useEffect(() =>{
@@ -99,6 +100,17 @@ const User = (props) => {
         }
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setInput(e.target.value)
+    }
+
+    if(input.length > 0) {
+        userObjects = userObjects.filter((i) => {
+            return i.user_username.includes(input)
+        })
+    }
+
     return(
     <>
         <nav aria-label="breadcrumb">
@@ -112,6 +124,12 @@ const User = (props) => {
                 <UserForm {...({addOrEdit,currentId,userObjects,disabled})}/>
             </div>
             <div className="col-md-7">
+
+            <input type="text" 
+                style={{display: "block", "width": "100%", "padding" : "7px", marginBottom : 10}} 
+                placeholder="Search by username"
+                onChange={handleChange}/>
+
                 <table className="table table-borderless table-stripped">
                     <thead className="thead-light">
                         <tr>
