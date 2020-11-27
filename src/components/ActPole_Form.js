@@ -1,6 +1,4 @@
 import React, {useState, useEffect} from "react";
-import Scrollspy from 'react-scrollspy'
-
 
 const ActPole_Form = (props) => {
     const initialFieldValues = {
@@ -206,11 +204,8 @@ const ActPole_Form = (props) => {
                 
                 <input type="submit" value="Update" className="btn btn-primary btn-block"/> 
 
-        
-
-        </form> 
-
     
+        </form> 
 
 
     );

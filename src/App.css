@@ -3,7 +3,7 @@
   position: absolute;
   left: 0;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');

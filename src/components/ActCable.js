@@ -67,7 +67,7 @@ const ActCable = () => {
     <>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <b><h2> Manage Cable Activities </h2></b>
+                <b><h2  style={{marginLeft: 35}}> Manage Cable Activities </h2></b>
             </ol>
         </nav>
 

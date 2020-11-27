@@ -103,7 +103,7 @@ const User = (props) => {
     <>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <b><h2> Manage Users </h2></b>
+                <b><h2 style={{marginLeft: 35}}> Manage Users </h2></b>
             </ol>
         </nav>
 

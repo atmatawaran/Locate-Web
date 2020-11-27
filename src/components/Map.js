@@ -254,6 +254,7 @@ function Search({ panTo }) {
         <ComboboxInput
         style={{ width: 400, margin: 0 }}
           value={value}
+          className="comboboxinput"
           onChange={handleInput}
           disabled={!ready}
           placeholder="Search"
