@@ -193,7 +193,7 @@ export default function Map(){
               </GoogleMap>
             </div> 
                       
-            <Modal show={show}>
+            <Modal style={{marginTop:110}} show={show}>
               <Modal.Header> <h3> Edit Facility </h3> <Button variant="secondary" onClick={() => setShow(false)}> Close </Button> </Modal.Header>
               <Modal.Body> <FacilityForm {...({addOrEdit,currentId,facilities,disabled})}/> </Modal.Body>
             </Modal>
@@ -252,7 +252,7 @@ function Search({ panTo }) {
     <div className="search">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
-        style={{ width: 400, margin: 0 }}
+        style={{ width: 400 }}
           value={value}
           className="comboboxinput"
           onChange={handleInput}
