@@ -1,49 +1,51 @@
 import React from 'react'
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import * as IoIcons from "react-icons/io";
+import * as MdIcons from "react-icons/md";
+import * as FiIcons from "react-icons/fi";
+import * as HiIcons from "react-icons/hi";
 
 export const SidebarData = [
     {
         title: "Map",
         path: '/',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <FaIcons.FaMap/>,
         cName: 'nav-text'
     },
     {
         title: "Authentication",
         path: '/authenticate-users',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <HiIcons.HiUsers/>,
         cName: 'nav-text'
     },
     {
         title: "Cable",
         path: '/activities-cable',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <MdIcons.MdPlayArrow/>,
         cName: 'nav-text'
     },
     {
         title: "Cabinet",
         path: '/activities-cabinet',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <MdIcons.MdPlayArrow/>,
         cName: 'nav-text'
     },
     {
         title: "DP",
         path: '/activities-dp',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <MdIcons.MdPlayArrow/>,
         cName: 'nav-text'
     },
     {
         title: "Manhole",
         path: '/activities-manhole',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <MdIcons.MdPlayArrow/>,
         cName: 'nav-text'
     },
     {
         title: "Pole",
         path: '/activities-pole',
-        icon: <AiIcons.AiFillHome/>,
+        icon: <MdIcons.MdPlayArrow/>,
         cName: 'nav-text'
     },
 ]

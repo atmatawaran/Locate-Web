@@ -10,7 +10,8 @@ const ActCable_Form = (props) => {
         cable_low_sag: "",
         cable_exposed: "",
         cable_remarks: "",
-        cable_find_recc: ""
+        cable_find_recc: "",
+        addedByUser: ""
     }
 
     var[values,setValues] = useState(initialFieldValues);

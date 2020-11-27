@@ -7,6 +7,7 @@ const ActCable = () => {
     var [cableObjects,setCableObjects] = useState({});
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
+    var [input, setInput] = useState("");
 
     // similar to componentDidMount
     useEffect(() =>{
@@ -63,8 +64,20 @@ const ActCable = () => {
         }
     }
 
+    const handleChange = (e) => {
+        e.preventDefault();
+        setInput(e.target.value)
+    }
+
+    if(input.length > 0) {
+        cableObjects = cableObjects.filter((i) => {
+            return i.addedbyUser.join().includes(input)
+        })
+    }
+
     return(
     <>
+        
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <b><h2  style={{marginLeft: 35}}> Manage Cable Activities </h2></b>
@@ -75,12 +88,19 @@ const ActCable = () => {
             <div className="col-md-5">
                 <ActCable_Form {...({addOrEdit,currentId,cableObjects,disabled})}/>
             </div>
+            
             <div className="col-md-7">
+
+                <input type="text" 
+                style={{display: "block", "width": "100%", "padding" : "7px", marginBottom : 10}} 
+                placeholder="Search by user"
+                onChange={handleChange}/>
+
                 <table className="table table-borderless table-stripped">
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
-                            <th> Activity Type </th>
+                            <th> Added by </th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -89,7 +109,9 @@ const ActCable = () => {
                             Object.keys(cableObjects).map(id =>{
                                 return <tr key={id}>
                                     <td>{cableObjects[id].activity_no}</td>
-                                    <td>{cableObjects[id].activity_type}</td>
+                                    <td>{cableObjects[id].addedbyUser.map((username, index) =>
+                                        <p style={{margin:0}} key={index}>{username}</p>)
+                                    }</td>
                                     <td>
                                     {/* <a style={{marginRight: 20}} className="btn btn-primary" onClick={()=> {setCurrentId(id)}}>Edit</a> */}
                                         <a style={{marginRight: 20}} className="btn btn-primary" onClick={ function(event){ setCurrentId(id); setDisabled(false)} }>Edit</a>
