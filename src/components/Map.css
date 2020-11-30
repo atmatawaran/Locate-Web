@@ -45,7 +45,7 @@ p {
 .search{
     position: absolute;
     top: 1rem;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%); 
     /* width: 1000px; */
     max-width: 400px;

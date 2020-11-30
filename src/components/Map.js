@@ -252,7 +252,7 @@ function Search({ panTo }) {
     <div className="search">
       <Combobox onSelect={handleSelect}>
         <ComboboxInput
-        style={{ width: 400 }}
+        style={{ width: 600 }}
           value={value}
           className="comboboxinput"
           onChange={handleInput}
