@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import ActDp_Form from "./ActDp_Form";
 import { db, auth } from "./firebase";
 
+import { Button, Table } from "react-bootstrap"
+
 const ActDp = () => {
 
     var [dpObjects,setDpObjects] = useState({});
@@ -110,7 +112,7 @@ const ActDp = () => {
                 placeholder="Search by user"
                 onChange={handleChange}/>
 
-                <table className="table table-borderless table-stripped">
+                <Table bordered hover>
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
@@ -136,7 +138,7 @@ const ActDp = () => {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
 

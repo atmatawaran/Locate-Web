@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import ActCabinet_Form from "./ActCabinet_Form";
 import { db, auth } from "./firebase";
 
+import { Button, Table } from "react-bootstrap";
+
 const ActCabinet = () => {
 
     var [cabinetObjects,setCabinetObjects] = useState({});
@@ -95,7 +97,7 @@ const ActCabinet = () => {
                 placeholder="Search by user"
                 onChange={handleChange}/>
 
-                <table className="table table-borderless table-stripped">
+                <Table bordered hover>
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
@@ -121,7 +123,7 @@ const ActCabinet = () => {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
 

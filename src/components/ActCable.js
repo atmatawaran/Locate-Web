@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
 import ActCable_Form from "./ActCable_Form";
 import { db, auth } from "./firebase";
+import './ActCable.css';
+
+import { Button, Table } from 'react-bootstrap';
 
 const ActCable = () => {
 
@@ -75,13 +78,14 @@ const ActCable = () => {
         })
     }
 
+    const ref = React.createRef();
+
     return(
-    <>
-        
+    <>  
         <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <b><h2  style={{marginLeft: 35}}> Manage Cable Activities </h2></b>
-            </ol>
+            <ol class="breadcrumb parent-button">
+                    <b><h2  style={{marginLeft: 35}}> Manage Cable Activities </h2></b>
+                </ol>
         </nav>
 
         <div className="row">
@@ -96,7 +100,7 @@ const ActCable = () => {
                 placeholder="Search by user"
                 onChange={handleChange}/>
 
-                <table className="table table-borderless table-stripped">
+                <Table bordered hover>
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
@@ -122,7 +126,7 @@ const ActCable = () => {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
 

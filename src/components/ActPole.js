@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import ActPole_Form from "./ActPole_Form";
 import { db, auth } from "./firebase";
 
+import { Button, Table } from "react-bootstrap";
+
 const ActPole = () => {
 
     var [poleObjects,setPoleObjects] = useState({});
@@ -103,7 +105,7 @@ const ActPole = () => {
                 placeholder="Search by user"
                 onChange={handleChange}/>
 
-                <table className="table table-borderless table-stripped">
+                <Table bordered hover>
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
@@ -129,7 +131,7 @@ const ActPole = () => {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
 

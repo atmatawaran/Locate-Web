@@ -13,7 +13,7 @@ import FacilityForm from "./FacilityForm.js";
 import trash from "../trash.svg";
 import edit from "../edit.svg";
 
-import { Button, Dropdown, DropdownButton, ButtonGroup, Modal, Table} from 'react-bootstrap';
+import { Button, Dropdown, DropdownButton, ButtonGroup, Card, Modal, ListGroup, Table} from 'react-bootstrap';
 
 import './Map.css'
 
@@ -59,6 +59,12 @@ export default function Map(){
     var [currentId, setCurrentId] = useState('');
     var [disabled, setDisabled] = useState(true);
 
+    var [cableCount, setCableCount] = useState(0);
+    var [cabCount, setCabCount] = useState(0);
+    var [dpCount, setDpCount] = useState(0);
+    var [mhCount, setMhCount] = useState(0);
+    var [poleCount, setPoleCount] = useState(0);
+
     useEffect(() =>{
         db.collection("facilities").onSnapshot(function(data){
             console.log(data);
@@ -69,10 +75,33 @@ export default function Map(){
         })
     },[])
 
+    // facilities.map((facility) => (
+
+    function getCount(){
+      var cable_count = 0, cab_count = 0, dp_count = 0, mh_count = 0, pole_count = 0;
+
+      facilities.map((facility) => {
+
+        switch(facility.fac_type){
+          case "Cable": cable_count++; break;
+          case "Cabinet": cab_count++; break;
+          case "DP/LCP/NAP": dp_count++; break;
+          case "Manhole": mh_count++; break;
+          case "Pole": pole_count++; break;
+        }
+      })
+      setCableCount(cable_count);
+      setCabCount(cab_count);
+      setDpCount(dp_count);
+      setMhCount(mh_count);
+      setPoleCount(pole_count);
+    }
+
   const onDelete = id =>{
-    if(window.confirm("Delete this document?")){
+    if(window.confirm("Are you sure you want to delete this facility?")){
         db.collection('facilities').doc(id).delete().then(function() {
             console.log("Document successfully deleted!");
+            alert("Facility successfully deleted!");
         });
     }
   }
@@ -97,7 +126,7 @@ export default function Map(){
         })
         .then(function() {
             console.log("Document successfully updated!");
-            alert("Document successfully updated!");
+            alert("Facility successfully updated!");
             setCurrentId('')
         });
 
@@ -149,16 +178,28 @@ export default function Map(){
                     options={options}
                     onLoad={onMapLoad}>
 
-                {/* <div class="dropdown">
-                <DropdownButton id="dropdown-item-button" title="Filter Markers">
-                  <Dropdown.Item as="button">Show All</Dropdown.Item>
-                  <Dropdown.Item as="button">Show Cabinet only</Dropdown.Item>
-                  <Dropdown.Item as="button">Show Cable only</Dropdown.Item>
-                  <Dropdown.Item as="button">Show DP/LCP/NAP only</Dropdown.Item>
-                  <Dropdown.Item as="button">Show Manhole only</Dropdown.Item>
-                  <Dropdown.Item as="button">Show Pole only</Dropdown.Item>
+          {/* <Card style={{ width: '15rem' }}>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>Facilities Count</ListGroup.Item>
+                  <ListGroup.Item>Cable</ListGroup.Item>
+                  <ListGroup.Item>Cabinet</ListGroup.Item>
+                  <ListGroup.Item>DP/LCP/NAP</ListGroup.Item>
+                  <ListGroup.Item>Manhole</ListGroup.Item>
+                  <ListGroup.Item>Pole</ListGroup.Item>
+                </ListGroup>
+              </Card> */}
+
+                <div class="dropdown">
+                <DropdownButton onClick={getCount} id="dropdown-item-button" title="Facility Count">
+
+                  <Dropdown.Item>Cable: {cableCount}</Dropdown.Item>
+                  <Dropdown.Item>Cabinet: {cabCount}</Dropdown.Item>
+                  <Dropdown.Item>DP/LCP/NAP: {dpCount}</Dropdown.Item>
+                  <Dropdown.Item>Manhole: {mhCount}</Dropdown.Item>
+                  <Dropdown.Item>Pole: {poleCount}</Dropdown.Item>
+                  <Dropdown.Item><b>Total Count: {Object.keys(facilities).length}</b></Dropdown.Item>
                 </DropdownButton>
-                  </div> */}
+                  </div>
 
                 {facilities.map((facility) => (
                   <Marker

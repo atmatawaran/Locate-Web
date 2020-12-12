@@ -3,6 +3,8 @@ import ActCable_Form from "./ActCable_Form";
 import ActManhole_Form from "./ActManhole_Form";
 import { db, auth } from "./firebase";
 
+import { Button, Table } from "react-bootstrap";
+
 const ActManhole = () => {
 
     var [manholeObjects,setManholeObjects] = useState({});
@@ -93,7 +95,7 @@ const ActManhole = () => {
                 placeholder="Search by user"
                 onChange={handleChange}/>
 
-                <table className="table table-borderless table-stripped">
+                <Table bordered hover>
                     <thead className="thead-light">
                         <tr>
                             <th> Activity ID </th>
@@ -119,7 +121,7 @@ const ActManhole = () => {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
         </div>
 
